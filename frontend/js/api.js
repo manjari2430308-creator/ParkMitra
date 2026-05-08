@@ -1,5 +1,5 @@
 // ─── CONFIG ──────────────────────────────────────
-const API_BASE = '/api';
+const API_BASE = 'https://parkmitra-backend.onrender.com/api';
 
 // ─── HTTP HELPER ──────────────────────────────────
 const api = {
