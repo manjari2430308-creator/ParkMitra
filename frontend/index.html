@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ParkMitra – Smart Parking Platform</title>
+  <meta name="description" content="ParkMitra helps you find, book, and pay for parking in seconds. Smart parking for smart cities.">
+
+  <!-- Leaflet Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- App Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Page loader */
+    #page-loader {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 99999; gap: 16px;
+      transition: opacity 0.4s;
+    }
+    #page-loader .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px; font-weight: 800;
+      background: linear-gradient(135deg, #00d4aa, #0099ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    #page-loader .tagline { color: #7a8ea8; font-size: 14px; }
+    .loader-bar {
+      width: 200px; height: 3px;
+      background: var(--border, #2a3a52);
+      border-radius: 2px; overflow: hidden;
+    }
+    .loader-bar-fill {
+      height: 100%;
+      background: linear-gradient(135deg, #00d4aa, #0099ff);
+      border-radius: 2px;
+      animation: loadFill 1.2s ease forwards;
+    }
+    @keyframes loadFill { from { width: 0; } to { width: 100%; } }
+  </style>
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div id="page-loader">
+    <div class="logo">🅿 ParkMitra</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <div class="tagline">Smart Parking · Instant Booking</div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar"></nav>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <!-- App Root -->
+  <main id="app"></main>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/pages-home-auth.js"></script>
+  <script src="js/pages-user.js"></script>
+  <script src="js/pages-landowner.js"></script>
+  <script src="js/pages-admin.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    // Hide loader after fonts/scripts load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('page-loader');
+        if (loader) {
+          loader.style.opacity = '0';
+          setTimeout(() => loader.remove(), 400);
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
